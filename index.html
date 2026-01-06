@@ -6,29 +6,24 @@
     <title>解树建 - 数据科学家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 全局变量与重置 */
-        :root {
-            --primary: #00f5ff;
-            --secondary: #7e22ce;
-            --accent: #ff00c8;
-            --dark: #0a0a1a;
-            --darker: #050510;
-            --light: #e0f8ff;
-            --text: #ffffff;
-            --text-secondary: #a0a0c0;
-            --card-bg: rgba(10, 15, 35, 0.7);
-            --glow: 0 0 15px rgba(0, 245, 255, 0.5);
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
+        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --primary: #00d4ff;
+            --secondary: #8a2be2;
+            --accent: #ff00ff;
+            --dark: #0d0d2b;
+            --darker: #08081c;
+            --light: #f0f8ff;
+            --text: #ffffff;
+            --text-secondary: #b0b0d0;
+            --card-bg: rgba(20, 25, 50, 0.8);
+            --glow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         body {
@@ -36,25 +31,11 @@
             background-color: var(--darker);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(126, 34, 206, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 20%),
-                linear-gradient(to bottom, var(--darker), var(--dark));
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300f5ff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.5;
-            z-index: -1;
+                linear-gradient(to bottom, var(--darker), var(--dark)),
+                radial-gradient(circle at 20% 20%, var(--secondary) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, var(--primary) 0%, transparent 30%);
+            min-height: 100vh;
         }
 
         /* 容器 */
@@ -66,22 +47,19 @@
 
         /* 导航栏 */
         header {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
             z-index: 1000;
-            background: rgba(5, 5, 16, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
-            transition: all 0.3s ease;
+            background-color: rgba(13, 13, 43, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 15px 0;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
         }
 
         .logo {
@@ -91,7 +69,6 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            text-shadow: var(--glow);
         }
 
         .logo i {
@@ -105,7 +82,7 @@
         }
 
         nav li {
-            margin: 0 15px;
+            margin: 0 10px;
         }
 
         nav a {
@@ -115,27 +92,11 @@
             padding: 8px 15px;
             border-radius: 5px;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--primary);
-            transition: width 0.3s;
         }
 
         nav a:hover {
             color: var(--primary);
-        }
-
-        nav a:hover:after {
-            width: 100%;
+            background-color: rgba(0, 212, 255, 0.1);
         }
 
         .mobile-menu {
@@ -147,40 +108,39 @@
 
         /* 英雄区域 */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 100px 0 50px;
             position: relative;
             overflow: hidden;
-            padding-top: 80px;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
         }
 
         .hero-content {
             max-width: 800px;
             padding: 0 20px;
-            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
-            }
-            to {
-                text-shadow: 0 0 20px rgba(0, 245, 255, 0.8), 0 0 30px rgba(0, 245, 255, 0.6);
-            }
         }
 
         .hero p {
@@ -191,83 +151,24 @@
 
         .btn {
             display: inline-block;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             padding: 12px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.6s;
-        }
-
-        .btn:hover:before {
-            left: 100%;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 245, 255, 0.5);
-        }
-
-        /* 粒子背景 */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                transform: translateY(-20px) translateX(20px);
-            }
-            100% {
-                transform: translateY(0) translateX(0);
-            }
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
         }
 
         /* 内容区域 */
         section {
             padding: 80px 0;
-            position: relative;
-        }
-
-        section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--primary), transparent);
         }
 
         h2 {
@@ -288,7 +189,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 3px;
         }
 
@@ -297,48 +198,26 @@
             display: flex;
             align-items: center;
             gap: 40px;
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         .avatar {
-            flex: 0 0 300px;
+            flex: 0 0 250px;
             text-align: center;
             position: relative;
         }
 
         .avatar img {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             border: 3px solid var(--primary);
             object-fit: cover;
             box-shadow: var(--glow);
-            transition: transform 0.5s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .avatar:before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: var(--gradient);
-            border-radius: 50%;
-            z-index: 1;
-            opacity: 0.7;
-            filter: blur(15px);
-        }
-
-        .avatar img:hover {
-            transform: scale(1.05);
         }
 
         .about-text {
@@ -362,19 +241,18 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: rgba(0, 245, 255, 0.1);
+            background-color: rgba(0, 212, 255, 0.1);
             color: var(--primary);
             border-radius: 50%;
             margin-right: 15px;
             transition: all 0.3s;
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
 
         .social-links a:hover {
-            background: var(--primary);
+            background-color: var(--primary);
             color: var(--dark);
             transform: translateY(-3px);
-            box-shadow: var(--glow);
         }
 
         /* 技能区域 */
@@ -385,17 +263,16 @@
         }
 
         .skill-category {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
             transition: transform 0.3s;
         }
 
         .skill-category:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .skill-category h3 {
@@ -423,46 +300,23 @@
 
         .skill-progress {
             height: 8px;
-            background: rgba(0, 245, 255, 0.1);
+            background-color: rgba(0, 212, 255, 0.1);
             border-radius: 4px;
             overflow: hidden;
-            position: relative;
-        }
-
-        .skill-progress:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: shine 2s infinite;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
         }
 
         .skill-progress div {
             height: 100%;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 4px;
             width: 0;
             transition: width 1.5s ease-in-out;
-            position: relative;
-            z-index: 2;
         }
 
         /* 学习计划 */
         .timeline {
             position: relative;
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -472,17 +326,15 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: var(--gradient);
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
             transform: translateX(-50%);
-            box-shadow: var(--glow);
         }
 
         .timeline-item {
             position: relative;
             margin-bottom: 50px;
             width: 50%;
-            padding: 0;
         }
 
         .timeline-item:nth-child(odd) {
@@ -496,12 +348,11 @@
         }
 
         .timeline-content {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
             transition: transform 0.3s;
         }
 
@@ -519,41 +370,40 @@
             content: '';
             position: absolute;
             top: 20px;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
-            background: var(--primary);
+            background-color: var(--primary);
             box-shadow: var(--glow);
             z-index: 2;
         }
 
         .timeline-item:nth-child(odd):before {
-            right: -10px;
+            right: -7px;
         }
 
         .timeline-item:nth-child(even):before {
-            left: -10px;
+            left: -7px;
         }
 
         /* 网站链接 */
         .websites-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
         }
 
         .website-card {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
             transition: transform 0.3s;
         }
 
         .website-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .website-icon {
@@ -561,27 +411,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .website-icon:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .website-card:hover .website-icon:before {
-            transform: translateX(100%);
         }
 
         .website-info {
@@ -629,12 +461,11 @@
         }
 
         .contact-info {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         .contact-item {
@@ -646,7 +477,7 @@
         .contact-item i {
             width: 50px;
             height: 50px;
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border-radius: 50%;
             display: flex;
@@ -654,7 +485,6 @@
             justify-content: center;
             margin-right: 15px;
             font-size: 1.2rem;
-            box-shadow: var(--glow);
         }
 
         .contact-item div h3 {
@@ -680,19 +510,19 @@
         input, textarea {
             width: 100%;
             padding: 15px;
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
             border-radius: 8px;
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s;
-            background: rgba(0, 10, 20, 0.5);
+            background-color: rgba(0, 0, 0, 0.3);
             color: var(--text);
         }
 
         input:focus, textarea:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         textarea {
@@ -701,7 +531,7 @@
         }
 
         button {
-            background: var(--gradient);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
             padding: 15px 40px;
@@ -712,37 +542,20 @@
             transition: all 0.3s;
             display: block;
             margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.6s;
-        }
-
-        button:hover:before {
-            left: 100%;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 245, 255, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
         }
 
         /* 页脚 */
         footer {
-            background: rgba(5, 5, 16, 0.9);
+            background-color: rgba(13, 13, 43, 0.9);
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid rgba(0, 245, 255, 0.2);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
         }
 
         .social-links-footer {
@@ -757,19 +570,18 @@
             justify-content: center;
             width: 45px;
             height: 45px;
-            background: rgba(0, 245, 255, 0.1);
+            background-color: rgba(0, 212, 255, 0.1);
             color: var(--primary);
             border-radius: 50%;
             margin: 0 10px;
             transition: all 0.3s;
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.3);
         }
 
         .social-links-footer a:hover {
-            background: var(--primary);
+            background-color: var(--primary);
             color: var(--dark);
             transform: translateY(-3px);
-            box-shadow: var(--glow);
         }
 
         /* 响应式设计 */
@@ -794,7 +606,7 @@
             }
             
             .timeline-item:before {
-                left: -10px !important;
+                left: -7px !important;
             }
             
             .timeline-item:nth-child(even) {
@@ -805,7 +617,6 @@
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
-                text-align: center;
             }
             
             nav ul {
@@ -814,10 +625,489 @@
             }
             
             nav li {
-                margin: 10px 0;
+                margin: 5px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .skills-container, .websites-grid {
+                grid-template-columns: 1fr;
             }
             
             .mobile-menu {
                 display: block;
                 position: absolute;
                 top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo"><i class="fas fa-code"></i>解树建</a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#skills">我的技能</a></li>
+                    <li><a href="#plan">学习计划</a></li>
+                    <li><a href="#websites">常用网站</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1>数据驱动未来，代码改变世界</h1>
+            <p>我是解树建，一名热爱数据科学和人工智能的大学生</p>
+            <a href="#about" class="btn">探索更多</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- 关于我 -->
+        <section id="about" class="fade-in">
+            <h2>关于我</h2>
+            <div class="about-content">
+                <div class="avatar">
+                    <!-- 这里可以添加头像 -->
+                    <i class="fas fa-user-circle" style="font-size: 200px; color: var(--primary);"></i>
+                </div>
+                <div class="about-text">
+                    <p>大家好！我叫<strong>解树建</strong>，今年21岁，是一名大数据专业的大学生。</p>
+                    <p>我对数据分析、机器学习和人工智能有浓厚的兴趣，喜欢探索数据背后的故事和规律。</p>
+                    <p>目前，我正在深入学习大数据技术栈，包括Hadoop、Spark等框架，并积极参与Kaggle数据科学竞赛。</p>
+                    <p>除了专业学习，我还喜欢阅读科技资讯、参加编程竞赛和打篮球。我的座右铭是：<em>"数据驱动未来，代码改变世界"</em>。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 我的技能 -->
+        <section id="skills" class="fade-in">
+            <h2>我的技能</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i>编程语言</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Java</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>SQL</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="90"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i>大数据技术</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Hadoop</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Spark</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="65"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>数据可视化</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i>数据科学</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>机器学习</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>数据挖掘</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>统计分析</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学习计划 -->
+        <section id="plan" class="fade-in">
+            <h2>我的学习计划</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2024年 - 基础巩固</h3>
+                        <p>深入学习Python高级编程和数据结构，掌握SQL高级查询和优化</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025年 - 技术拓展</h3>
+                        <p>学习Hadoop和Spark生态系统，掌握大数据处理流程</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2026年 - 专业深化</h3>
+                        <p>深入研究机器学习算法，参与实际数据科学项目</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2027年 - 职业准备</h3>
+                        <p>准备大数据相关认证，完善项目作品集，为就业做准备</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常用网站 -->
+        <section id="websites" class="fade-in">
+            <h2>我喜欢的网站</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 30px;">以下是一些我经常访问的网站，它们帮助我不断学习和成长：</p>
+            <div class="websites-grid">
+                <div class="website-card">
+                    <div class="website-icon">
+                        <i class="fab fa-kaggle"></i>
+                    </div>
+                    <div class="website-info">
+                        <h3>Kaggle</h3>
+                        <p>全球最大的数据科学竞赛平台</p>
+                        <a href="https://www.kaggle.com" target="_blank">访问网站 <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="website-card">
+                    <div class="website-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="website-info">
+                        <h3>GitHub</h3>
+                        <p>代码托管与协作平台</p>
+                        <a href="https://github.com" target="_blank">访问网站 <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="website-card">
+                    <div class="website-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="website-info">
+                        <h3>Towards Data Science</h3>
+                        <p>数据科学社区和文章平台</p>
+                        <a href="https://towardsdatascience.com" target="_blank">访问网站 <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="website-card">
+                    <div class="website-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="website-info">
+                        <h3>Coursera</h3>
+                        <p>在线学习平台</p>
+                        <a href="https://www.coursera.org" target="_blank">访问网站 <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我 -->
+        <section id="contact" class="fade-in">
+            <h2>联系我</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>邮箱</h3>
+                            <p>1942586627@qq.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>电话</h3>
+                            <p>153-1081-1330</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>地址</h3>
+                            <p>中国重庆市</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>响应时间</h3>
+                            <p>通常在24小时内回复</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">你的名字</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">你的邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">主题</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">发送消息</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="social-links-footer">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-weixin"></i></a>
+            </div>
+            <p>数据驱动未来，代码改变世界</p>
+            <p style="color: var(--text-secondary); margin-top: 10px;">版权所有 © 2025 解树建 | 最后更新: 2025年1月</p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                const nav = document.querySelector('nav');
+                nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // 技能进度条动画
+            const skillBars = document.querySelectorAll('.skill-progress div');
+            
+            // 使用Intersection Observer API来触发技能条动画
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target.querySelector('div');
+                        if (bar) {
+                            const width = bar.getAttribute('data-width');
+                            setTimeout(() => {
+                                bar.style.width = width + '%';
+                            }, 300);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.skill-bar').forEach(progress => {
+                observer.observe(progress);
+            });
+
+            // 表单验证
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !subject || !message) {
+                    showNotification('请填写所有字段！', 'error');
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    showNotification('请输入有效的邮箱地址！', 'error');
+                    return;
+                }
+                
+                showNotification('消息发送成功！感谢您的反馈。', 'success');
+                this.reset();
+            });
+            
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            function showNotification(message, type) {
+                // 创建通知元素
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.padding = '15px 20px';
+                notification.style.borderRadius = '5px';
+                notification.style.color = 'white';
+                notification.style.zIndex = '1000';
+                notification.style.fontWeight = '600';
+                notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+                notification.style.transition = 'all 0.3s';
+                
+                if (type === 'success') {
+                    notification.style.background = 'linear-gradient(to right, #2ecc71, #27ae60)';
+                } else {
+                    notification.style.background = 'linear-gradient(to right, #e74c3c, #c0392b)';
+                }
+                
+                document.body.appendChild(notification);
+                
+                // 3秒后移除通知
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100px)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // 平滑滚动
+            document.querySelectorAll('nav a, .btn').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            
+                            // 移动端点击后关闭菜单
+                            if (window.innerWidth <= 768) {
+                                document.querySelector('nav').style.display = 'none';
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
